@@ -1,7 +1,7 @@
 
 # Quitter: A Social Media App to Quit Smoking
 
-A social media app for users who want to, are in the process of, or have successfully quit smoking or vaping and need the support of others while on their journey. The app allows users to create a login and profile, create and comment on posts, and save other users as fellow "quitters". Quitter is  built with a framework of Flask, SQLAlchemy, and WTForms.
+A social media app for users who want to, are in the process of, or have successfully quit smoking or vaping and need the support of others while on their journey. The app allows users to create a login and profile, create and comment on posts, and save other users as fellow "quitters". Quitter is built with a framework of Flask, SQLAlchemy, and WTForms.
 
 
 ## Features
@@ -10,6 +10,7 @@ A social media app for users who want to, are in the process of, or have success
 - Create posts
 - Track quit date/ # of cigarettes not smoked
 - Maintain active user list (friends = quitters)
+
 
 
 ## Run Locally
