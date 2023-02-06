@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Quitter Tracker</h1>
+
+<p>Add stats here PER USER WHO IS LOGGED IN 
+  - quit date
+  - time since last cigarette (years, months, days, hours, minutes, seconds)
+  - number of cigarettes not smoked
+  - money saved
+  - daily health fact
+</p>
+
+<!-- <form method="POST" action="{{ url_for('main.new_store') }}">
+  {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter the new store information:</legend> -->
+        <!-- TODO: Remove the next paragraph and use the `form` object passed in 
+            from the route to render a form. -->
+        <!-- {{ form.title.label }}
+        {{ form.title }} -->
+        <!-- Show form errors -->
+        <!-- <ul>
+          {% for error in form.errors %}
+          <li class="error">{{ error }}</li>
+          {% endfor %}
+        </ul>
+            
+        {{ form.address.label }}
+        {{ form.address }}
+
+        {{ form.submit }}
+    </fieldset>
+</form> -->
+{% endblock %}

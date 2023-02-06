@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quitter Tracker</title>
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            <nav>
+                <a href="/">Home</a>
+                <div>
+                    {% if current_user.is_authenticated %}
+                        <a href="/new_post">New Post</a>
+                    <br>
+                        <a href="/new_fried">Add Friend</a>
+                    {% else %}
+                        <!-- stuff you only want to show to logged-out users -->
+                        <a href="/signup">Sign Up</a>
+                        <a href="/login">Log In</a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
