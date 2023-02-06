@@ -78,9 +78,9 @@ def user_detail(user_id):
 @main.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required
 def post_detail(post_id):
-    item = Post.query.get(post_id)
+    post = Post.query.get(post_id)
     # TODO: Create a GroceryItemForm and pass in `obj=item`
-    form = PostForm(obj=item)
+    form = PostForm(obj=post)
 
     # STRETCH - Add delete capability
     if form.delete.data:
@@ -91,15 +91,15 @@ def post_detail(post_id):
     # - flash a success message, and
     # - redirect the user to the item detail page.
     if form.validate_on_submit():
-        form.populate_obj(item)
-        db.session.add(item)
+        form.populate_obj(post)
+        db.session.add(post)
         db.session.commit()
 
-        flash('Good News! The item was UPDATED successfully.')
-        return redirect(url_for('main.item_detail', item_id=item.id))
+        flash('Good News! The post was UPDATED successfully.')
+        return redirect(url_for('main.post_detail', post_id=post.id))
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('item_detail.html', item=item, form=form)
+    return render_template('post_detail.html', post=post, form=form)
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
 @login_required

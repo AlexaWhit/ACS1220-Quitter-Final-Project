@@ -32,8 +32,8 @@ class Post(db.Model):
     """Post model."""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    author = db.Column(db.Sring(200), nullable=False)
-    type = db.Column(db.Enum(Purpose), default=Purpose.OTHER)
+    author = db.Column(db.String(200), nullable=False)
+    type = db.Column(db.Enum(Purpose))
     photo_url = db.Column(URLType)
     user = db.Column(
         db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -48,7 +48,7 @@ class Post(db.Model):
 class Photo(db.Model):
     """Photo model."""
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False, unique=True)
+    title = db.Column(db.String(80), nullable=False)
     photo_url = db.Column(URLType)
     photos = db.relationship('Post', secondary='User', back_populates='posts')
 
@@ -63,7 +63,7 @@ class Reaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False, unique=True)
-    books = db.relationship('Book', secondary='favorite_book', back_populates='users')
+    # books = db.relationship('Book', secondary='favorite_book', back_populates='users')
 
     def __str__(self):
         return f'<User: {self.username}>'
@@ -76,7 +76,7 @@ class Tracker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False, unique=True)
-    books = db.relationship('Book', secondary='favorite_book', back_populates='users')
+    # books = db.relationship('Book', secondary='favorite_book', back_populates='users')
 
     def __str__(self):
         return f'<Quitter Tracker: {self.id}>'

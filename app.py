@@ -1,4 +1,4 @@
-from quitter_app.extensions import app, db
+from quitter_app.extensions import *
 from quitter_app.routes import main
 
 app.register_blueprint(main)
