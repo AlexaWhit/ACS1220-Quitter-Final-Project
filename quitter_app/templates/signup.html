@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Log In</h1>
+<h1>CREATE AN ACCOUNT</h1>
 
 <form action="/signup" method="POST">
     {{ form.csrf_token }}
@@ -20,6 +20,70 @@
         {{ form.password }}
         <ul>
         {% for error in form.password.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.first_name.label }}
+        {{ form.first_name }}
+        <ul>
+        {% for error in form.first_name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.last_name.label }}
+        {{ form.last_name }}
+        <ul>
+        {% for error in form.last_name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.email.label }}
+        {{ form.email(placeholder="ex. test@gmail.com") }}
+        <ul>
+        {% for error in form.email.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.birth_date.label }}
+        {{ form.birth_date(placeholder="YYYY-mm-dd") }}
+        <ul>
+        {% for error in form.birth_date.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.quit_date.label }}
+        {{ form.quit_date(placeholder="YYYY-mm-dd") }}
+        <ul>
+        {% for error in form.quit_date.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.avg_cigs.label }}
+        {{ form.avg_cigs}}
+        <ul>
+        {% for error in form.avg_cigs.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.about_me.label }}
+        {{ form.about_me}}
+        <ul>
+        {% for error in form.about_me.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.profile_pic.label }}
+        {{ form.profile_pic(placeholder="URL") }}
+        <ul>
+        {% for error in form.profile_pic.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>

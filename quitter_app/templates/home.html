@@ -10,12 +10,13 @@
 
 <h2>Homepage</h2>
 
-<!-- {% for store in all_stores %} -->
-<!-- <div class="store">
-    <a href="/store/{{ store.id }}">{{ store.title }}</a> - 
-    {{ store.items|length }} items
-    <p><strong>Address:</strong> {{ store.address }}</p>
+{% for post in all_posts %} 
+<div class="post">
+    <a href="/post/{{ post.id }}">{{ post.title }}</a> - 
+    {{ post.id|length }} posts
+    <p><strong>Type:</strong> {{ post.audience }}</p>
+    <p><strong>Body:</strong> {{ post.body }}</p>
 </div>
-{% endfor %} -->
+{% endfor %}
 
 {% endblock %}

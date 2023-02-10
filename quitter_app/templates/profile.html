@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>
+Welcome to {{ user.username }}'s profile.
+</p>
+
+<!-- TODO: Display the user's actual favorites here -->
+
+<p>
+    {{ user.profile_pic}}
+    Name: {{user.first_name}}{{user.last_name}}
+    Quit Date: {{ user.quit_date }}
+    # Cigarettes Not Smoked: {{ user.quit_date }} x days since not Smoked
+    Total Money Saved (on average): $x.xx
+
+    About Me: {{ user.about_me }}
+
+</p>
+
+{% endblock %}

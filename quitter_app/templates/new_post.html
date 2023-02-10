@@ -4,25 +4,24 @@
 
 <p>Form to create new post will be here</p>
 
-<!-- <form method="POST" action="{{ url_for('main.new_item') }}">
+<form method="POST" action="{{ url_for('main.new_posts') }}">
   {{ form.csrf_token }}
   <fieldset>
-    <legend>Please enter your information:</legend>
-    TODO: Remove the next paragraph and use the `form` object passed in 
-            from the route to render a form. -->
-    <!-- {{ form.name.label }} {{ form.name }} -->
+    <legend>Enter the following information</legend>
+    {{ form.title.label }} {{ form.title }}
+
     <!-- Show form errors -->
-    <!-- <ul>
+    <ul>
       {% for error in form.errors %}
       <li class="error">{{ error }}</li>
       {% endfor %}
     </ul>
 
-    {{ form.price.label }} 
-    {{ form.price }} 
+    {{ form.audience.label }} 
+    {{ form.audience }}
     
-    {{ form.category.label }} {{
-    form.category }} 
+    {{ form.body.label }} 
+    {{ form.body }}
     
     {{ form.photo_url.label }} 
     {{ form.photo_url }} 
@@ -32,6 +31,6 @@
     
     {{ form.submit }}
   </fieldset>
-</form> --> -->
+</form>
 
 {% endblock %}

@@ -2,13 +2,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #eee;
+    background-color: rgb(246, 149, 165);
     font-family: 'Open Sans', sans-serif;
 }
 
 #content {
     width: 70%;
-    background-color: white;
+    background-color: pink;
     padding: 20px;
 }
 
@@ -22,7 +22,7 @@ nav {
 nav a {
     color: navy;
     text-decoration: none;
-    border: 1px solid black;
+    border: 2px solid hotpink;
     padding: 1px 5px;
     font-size: 1.2em;
 }
@@ -43,27 +43,10 @@ fieldset input {
 }
 
 input[type=submit] {
-    width: 100px;
+    padding: 10px 20px;
     align-self: flex-end;
 }
 
-div.store {
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-div.items {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-div.item-details {
-    border: 1px solid black;
-    margin: 5px;
-    padding: 5px;
-    text-align: center;
-    width: 250px;
-    height: 300px;
+li.error {
+    color: red;
 }
