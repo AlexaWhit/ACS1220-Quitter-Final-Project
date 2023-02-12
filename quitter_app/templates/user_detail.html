@@ -1,45 +1,111 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- <h1>User Profile - {{ user.username }}</h1> -->
-<h1>User Profile</h1>
+{{ for current_user in all_users }}
 
-<p>User's information will go here!</p>
-<!-- <p><img src="{{ item.photo_url }}" width="250px" height="250px"></p>
+<h1>{{ current_user.username }}</h1>
+<h2>User Profile</h2>
 
-<p><strong>Price: $</strong> {{ item.price }}</p>
+<p>About {{ current_user.username }} </p>
+<p><img src="{{ current_user.profile_pic }}" width="250px" height="250px"></p> 
 
-<p><strong>Category:</strong> {{ item.category }}</p>
+<p><strong>Name: </strong> {{ current_user.first_name }}{{ current_user.last_name }}</p>
+<p><strong>Email: </strong> {{ current_user.email}}</p>
+<p><strong>Birth Date: </strong> {{ current_user.birth_date }}</p>
+<p><strong>Quit Date: </strong> {{ current_user.quit_date }}</p>
+<p><strong>Average Cigarettes Smoked/Day: </strong> {{ current_user.abg_cigs}}</p>
+<p><strong>About Me:</strong> {{ current_user.about_me }}</p>
 
-<p><strong>Store:</strong> {{ item.store.title }}</p> -->
 
 
-<h2>Edit User Info</h2>
+<h2>Update Your Information Here</h2>
 
-<p>Form will go here where the user can edit their information</p>
-<!-- 
 <form method="POST" action="{{ url_for('main.item_detail', item_id=item.id) }}">
     {{ form.csrf_token }}
     <fieldset>
-        <legend>Please update the item information:</legend>
-        {{ form.first_name.label }} 
+        <legend>Please update the user info:</legend>
+        {{ form.username.label }}
+        {{ form.username }}
+        <ul>
+        {% for error in form.username.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.password.label }}
+        {{ form.password }}
+        <ul>
+        {% for error in form.password.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.first_name.label }}
         {{ form.first_name }}
-    
-        {{ form.last_name.label }} 
-        ${{ form.last_name }} 
-        
-        {{ form.about_me.label }} 
-        {{ form.about_me }} 
-        
-        {{ form.photo.label }} 
-        {{ form.photo_url }} 
-        
-        {{form.quit_date.label }} 
-        {{ form.quit_date }} 
-        
+        <ul>
+        {% for error in form.first_name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.last_name.label }}
+        {{ form.last_name }}
+        <ul>
+        {% for error in form.last_name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.email.label }}
+        {{ form.email(placeholder="ex. test@gmail.com") }}
+        <ul>
+        {% for error in form.email.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.birth_date.label }}
+        {{ form.birth_date(placeholder="YYYY-mm-dd") }}
+        <ul>
+        {% for error in form.birth_date.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.quit_date.label }}
+        {{ form.quit_date(placeholder="YYYY-mm-dd") }}
+        <ul>
+        {% for error in form.quit_date.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.avg_cigs.label }}
+        {{ form.avg_cigs}}
+        <ul>
+        {% for error in form.avg_cigs.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.about_me.label }}
+        {{ form.about_me}}
+        <ul>
+        {% for error in form.about_me.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.profile_pic.label }}
+        {{ form.profile_pic(placeholder="URL") }}
+        <ul>
+        {% for error in form.profile_pic.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
         {{ form.submit }}
-        {{ form.delete }}
     </fieldset>
-</form> -->
+</form>
 
 {% endblock %}

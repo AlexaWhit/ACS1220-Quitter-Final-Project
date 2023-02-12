@@ -26,7 +26,7 @@ def signup():
             quit_date=form.quit_date.data,
             avg_cigs=form.avg_cigs.data,
             about_me=form.about_me.data,
-            # profile_pic=form.profile_pic.data,
+            profile_pic=form.profile_pic.data,
         )
         db.session.add(user)
         db.session.commit()

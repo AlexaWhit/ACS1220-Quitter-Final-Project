@@ -2,14 +2,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(246, 149, 165);
+    background: radial-gradient(#87CEFA, #9370DB, #87CEFA);
+    /* background-color: orange; */
     font-family: 'Open Sans', sans-serif;
 }
 
 #content {
     width: 70%;
-    background-color: pink;
+    background-color: white;
     padding: 20px;
+    border: 15px solid rgb(255, 111, 0);
+    border-radius: 10%;
+}
+
+h1 {
+    color: rgb(5, 55, 147);
 }
 
 nav {
@@ -22,7 +29,7 @@ nav {
 nav a {
     color: navy;
     text-decoration: none;
-    border: 2px solid hotpink;
+    border: 2px solid blue;
     padding: 1px 5px;
     font-size: 1.2em;
 }
@@ -49,4 +56,8 @@ input[type=submit] {
 
 li.error {
     color: red;
-}
+} 
+
+/* TRYING NEW BACKGROUND */
+
+

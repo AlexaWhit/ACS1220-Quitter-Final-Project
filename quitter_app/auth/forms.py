@@ -14,7 +14,7 @@ class SignUpForm(FlaskForm):
     email = StringField('Email', validators=[Email(), DataRequired()])
     birth_date = DateField('Date of Birth', validators=[DataRequired()])
     quit_date = DateField('Quit Date', validators=[DataRequired()])
-    avg_cigs = IntegerField('Average Cigs', validators=[DataRequired()])
+    avg_cigs = IntegerField('Average Cigarettes Smoked per Day', validators=[DataRequired()])
     about_me = TextAreaField('About Me')
     profile_pic = StringField('Profile Picture', validators=[DataRequired()])
     submit = SubmitField('Sign Up')

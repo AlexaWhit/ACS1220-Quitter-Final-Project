@@ -22,21 +22,10 @@ def homepage():
 
 @main.route('/user_profile', methods=['GET', 'POST'])
 @login_required
-def new_user():
-    form = UserForm()
-
-    if form.validate_on_submit():
-        new_user = User(
-            name=form.username.data,
-            password=form.password.data
-        )
-        db.session.add(new_user)
-        db.session.commit()
-    
-        flash('Success! The new STORE was created successfully.')
-        return redirect(url_for('main.store_detail', store_id=new_user.id))
-
-    return render_template('new_store.html', form=form)
+def view_profile(user_id):
+    current_user = User.query.get(current_user.user_id)  
+    return redirect(url_for('main.user_profile', user_id=current_user.id))
+    return render_template('profile.html', form=form)
 
 @main.route('/new_post', methods=['GET', 'POST'])
 @login_required
@@ -70,7 +59,7 @@ def user_detail(user_id):
         db.session.add(user)
         db.session.commit()
 
-        flash('Good News! The user was UPDATED successfully.')
+        flash('Good News! {{user.username}} was UPDATED successfully.')
         return redirect(url_for('main.user_detail', user_id=user.id))
 
     # TODO: Send the form to the template and use it to render the form fields

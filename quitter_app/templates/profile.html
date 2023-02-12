@@ -3,19 +3,19 @@
 {% block content %}
 
 <p>
-Welcome to {{ user.username }}'s profile.
+Welcome to {{ current_user.username }}'s profile.
 </p>
 
 <!-- TODO: Display the user's actual favorites here -->
 
 <p>
-    {{ user.profile_pic}}
-    Name: {{user.first_name}}{{user.last_name}}
-    Quit Date: {{ user.quit_date }}
-    # Cigarettes Not Smoked: {{ user.quit_date }} x days since not Smoked
+    {{ current_user.profile_pic}}
+    Name: {{current_user.first_name}}{{current_user.last_name}}
+    Quit Date: {{ current_user.quit_date }}
+    # Cigarettes Not Smoked: {{ current_user.quit_date }} x days since not Smoked
     Total Money Saved (on average): $x.xx
 
-    About Me: {{ user.about_me }}
+    About Me: {{ current_user.about_me }}
 
 </p>
 

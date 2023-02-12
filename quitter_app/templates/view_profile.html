@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ user.username }}</h1>
+<h2>User Profile</h2>
+
+<p>About {{ user.username }} </p>
+<p><img src="{{ user.profile_pic }}" width="250px" height="250px"></p> 
+
+<p><strong>Quit Date: </strong> {{ user.quit_date }}</p>
+
+<p><strong>About Me:</strong> {{ user.about_me }}</p>
+
+
+
+<h2>Edit User Info</h2>
+
+<p>Form will go here where the user can edit their information</p>
+<!-- 
+<form method="POST" action="{{ url_for('main.item_detail', item_id=item.id) }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please update the item information:</legend>
+        {{ form.first_name.label }} 
+        {{ form.first_name }}
+    
+        {{ form.last_name.label }} 
+        ${{ form.last_name }} 
+        
+        {{ form.about_me.label }} 
+        {{ form.about_me }} 
+        
+        {{ form.photo.label }} 
+        {{ form.photo_url }} 
+        
+        {{form.quit_date.label }} 
+        {{ form.quit_date }} 
+        
+        {{ form.submit }}
+        {{ form.delete }}
+    </fieldset>
+</form> -->
+
+{% endblock %}
