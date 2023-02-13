@@ -18,9 +18,9 @@ class UserForm(FlaskForm):
     quit_date = DateField('Quit Date', validators=[DataRequired()])
     avg_cigs = IntegerField('Average Cigs', validators=[DataRequired()])
     about_me = TextAreaField('About Me')
-    profie_pic = StringField('Profile Picture', validators=[URL()])
-    submit = SubmitField('Submit User')
-    delete = SubmitField('Delete User')
+    profile_pic = StringField('Profile Picture', validators=[URL()])
+    submit = SubmitField('Submit')
+    delete = SubmitField('Delete')
 
 
 class PostForm(FlaskForm):

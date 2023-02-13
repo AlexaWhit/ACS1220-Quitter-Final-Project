@@ -2,21 +2,39 @@
 
 {% block content %}
 
+{% if current_user.is_authenticated %}
+<a href="/">Homepage</a>
+<br>
+<a href="/new_post">New Post</a>
+<br>
+<a href="/new_friend">Add Friend</a>
+<br>
+<a href="/user/<user_id>">Update Profile</a>
+<br>
+<a href="/logout">Logout</a>
+{% endif %}
+
 <p>
 Welcome to {{ current_user.username }}'s profile.
 </p>
 
-<!-- TODO: Display the user's actual favorites here -->
-
 <p>
-    {{ current_user.profile_pic}}
-    Name: {{current_user.first_name}}{{current_user.last_name}}
-    Quit Date: {{ current_user.quit_date }}
-    # Cigarettes Not Smoked: {{ current_user.quit_date }} x days since not Smoked
-    Total Money Saved (on average): $x.xx
-
-    About Me: {{ current_user.about_me }}
-
+    <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
 </p>
+<p>Name: {{current_user.username}}</p>
+<p>Quit Date: {{ current_user.quit_date }}</p>
+<p>Number of Days Smoke Free: {{ smoke_free_days }}</p>
+<p>Total Money Saved (on average): $x.xx</p>
 
+<p>About Me: {{ current_user.about_me }}</p>
+<ul>
+    <li>All</li>
+    <li>Posts</li>
+    <li>By</li>
+    <li>This</li>
+    <li>User</li>
+    <li>Will</li>
+    <li>Go</li>
+    <li>Here</li>
+</ul>
 {% endblock %}

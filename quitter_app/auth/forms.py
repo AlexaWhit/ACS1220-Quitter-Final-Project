@@ -9,15 +9,15 @@ class SignUpForm(FlaskForm):
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])
     password = PasswordField('Password', validators=[DataRequired()])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
     email = StringField('Email', validators=[Email(), DataRequired()])
     birth_date = DateField('Date of Birth', validators=[DataRequired()])
     quit_date = DateField('Quit Date', validators=[DataRequired()])
     avg_cigs = IntegerField('Average Cigarettes Smoked per Day', validators=[DataRequired()])
     about_me = TextAreaField('About Me')
-    profile_pic = StringField('Profile Picture', validators=[DataRequired()])
-    submit = SubmitField('Sign Up')
+    profile_pic = StringField('Profile Picture')
+    submit = SubmitField('Submit')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

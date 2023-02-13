@@ -19,23 +19,7 @@
             {% for message in get_flashed_messages() %}
                 <p>{{ message }}</p>
             {% endfor %}
-            <nav>
-                <a href="/">Home</a>
-                <div>
-                    {% if current_user.is_authenticated %}
-                        <a href="/new_post">New Post</a>
-                    <br>
-                        <a href="/new_friend">Add Friend</a>
-                    <br>
-                        <a href="/profile/<username>">View Profile</a>
-                    <br>
-                        <a href="/logout">Logout</a>
-                    {% else %}
-                        <a href="/signup">Sign Up</a>
-                        <a href="/login">Log In</a>
-                    {% endif %}
-                </div>
-            </nav>
+            
             {% block content %}{% endblock %}
         </div>
     </body>
