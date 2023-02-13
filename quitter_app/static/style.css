@@ -1,63 +1,126 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: radial-gradient(#87CEFA, #9370DB, #87CEFA);
-    /* background-color: orange; */
-    font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(#87cefa, #9370db, #87cefa);
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
 }
 
 #content {
-    width: 70%;
-    background-color: white;
-    padding: 20px;
-    border: 15px solid rgb(255, 111, 0);
-    border-radius: 10%;
+  width: 70%;
+  max-width: 800px;
+  min-width: 500px;
+  background-color: white;
+  padding: 40px;
+  border: 15px solid rgb(255, 111, 0);
+  border-radius: 10%;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 h1 {
-    color: rgb(5, 55, 147);
+  color: rgb(5, 55, 147);
+}
+
+.logo b {
+  font: 400 19vh "Pacifico";
+  color: #fee;
+  position: relative;
+  justify-content: center;
+  padding-left: 2em;
+  text-align: center;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #FF6700, 0 0 0.5em #FE8802,
+    0 0 0.1em #FE3403, 0 10px 3px #000;
+}
+.logo b span {
+  animation: blink linear infinite 2s;
+}
+.logo b span:nth-of-type(2) {
+  animation: blink linear infinite 3s;
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79% {
+    color: #333;
+  }
+  80% {
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+
+.Title-Subtitle {
+  font-size: 12px;
+  font-family: monaco;
+  color: white;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-bottom: 70px;
+  padding-left: 3em;
+  justify-content: center;
+  text-align: center;
 }
 
 nav {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 nav a {
-    color: navy;
-    text-decoration: none;
-    border: 2px solid blue;
-    padding: 1px 5px;
-    font-size: 1.2em;
+  color: navy;
+  text-decoration: none;
+  padding: 1px 5px;
+  font-size: 1.2em;
 }
 
 fieldset {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 20px;
 }
 
 fieldset * {
-    margin: 5px;
+  margin: 5px;
 }
 
 fieldset input {
-    padding: 5px;
+  padding: 5px;
 }
 
-input[type=submit] {
-    padding: 10px 20px;
-    align-self: flex-end;
+input[type="submit"] {
+  padding: 10px 20px;
+  align-self: flex-end;
 }
 
 li.error {
-    color: red;
-} 
+  color: red;
+}
 
 /* TRYING NEW BACKGROUND */
-
-

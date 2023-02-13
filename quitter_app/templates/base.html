@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Quitter Tracker</title>
+              <header>
+        <h1>
+          <div class="logo">
+            <b>qu<span>i</span>tt<span>e</span>r</b>
+          </div>
+        </h1>
+        <div class="Title-Subtitle">GAIN INSPIRATION. VOICE FRUSTRATION.
+            MAINTAIN MOTIVATION.</div>
+        <div>
         <link rel="stylesheet" href="/static/style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -11,7 +19,6 @@
             {% for message in get_flashed_messages() %}
                 <p>{{ message }}</p>
             {% endfor %}
-            <img src="/static/logo.png" alt="logo" width="300" height="300">
             <nav>
                 <a href="/">Home</a>
                 <div>
@@ -20,7 +27,7 @@
                     <br>
                         <a href="/new_friend">Add Friend</a>
                     <br>
-                        <a href="/user_profile">View Profile</a>
+                        <a href="/profile/<username>">View Profile</a>
                     <br>
                         <a href="/logout">Logout</a>
                     {% else %}

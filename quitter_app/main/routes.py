@@ -20,12 +20,28 @@ def homepage():
     return render_template('home.html', 
         all_posts=all_posts, all_users=all_users)
 
-@main.route('/user_profile', methods=['GET', 'POST'])
+@main.route('/profile/<username>')
 @login_required
-def view_profile(user_id):
-    current_user = User.query.get(current_user.user_id)  
-    return redirect(url_for('main.user_profile', user_id=current_user.id))
+def profile(username):
+    user = User.query.filter_by(username=username)
+    return render_template('profile.html', user=user)
+
+@main.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    current_user = User.query.get(current_user.id)  
+    form = UserForm(obj=current_user)
+
+    if form.validate_on_submit():
+        form.populate_obj(current_user)
+        db.session.add(current_user)
+        db.session.commit()
+
+        flash('Success! Your profile has been updated!')
+        return redirect(url_for('main.view_profile'))
+    
     return render_template('profile.html', form=form)
+
 
 @main.route('/new_post', methods=['GET', 'POST'])
 @login_required

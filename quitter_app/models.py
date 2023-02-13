@@ -18,8 +18,27 @@ class ReactionEmoji(FormEnum):
     SUPPORT = '💪'
     CONGRATS = '🥳'
 
+friends = db.Table('friends',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
+
+class Friend(db.Model):
+    """Friend model."""
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', foreign_keys=[user_id], back_populates='friends')
+    friend = db.relationship('User', foreign_keys=[friend_id], back_populates='friend_of')
+
+    def __str__(self):
+        return f'<Friendship between {self.user.username} and {self.friend.username}>'
+
+    def __repr__(self):
+        return f'<Friendship between {self.user.username} and {self.friend.username}>'
+
 class User(UserMixin, db.Model):
-    """Grocery Store model."""
+    """User model."""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
@@ -30,14 +49,19 @@ class User(UserMixin, db.Model):
     quit_date = db.Column(db.Date)
     avg_cigs = db.Column(db.Integer)
     about_me = db.Column(db.String(8000))
-    profie_pic = db.Column(URLType)
-    # posts = db.relationship('GroceryItem', back_populates='store')
+    profile_pic = db.Column(URLType)
+    posts = db.relationship('Post', back_populates='created_by')
+    reactions = db.relationship('Reaction', back_populates='created_by')
+    friends = db.relationship('Friend', foreign_keys=[Friend.user_id], back_populates='user')
+    friend_of = db.relationship('Friend', foreign_keys=[Friend.friend_id], back_populates='friend')
+
 
     def __str__(self):
         return f'<Username: {self.username}>'
 
     def __repr__(self):
         return f'<Username: {self.username}>'
+
 
 class Post(db.Model):
     """Post model."""
@@ -57,7 +81,7 @@ class Post(db.Model):
         return f'<Post ID & Title: {self.id} {self.title}>'
 
 class Reaction(db.Model):
-    """Photo model."""
+    """Reacton model."""
     id = db.Column(db.Integer, primary_key=True)
     reaction = db.Column(db.Enum(ReactionEmoji))
     comment = db.Column(db.String(8000))
@@ -71,4 +95,3 @@ class Reaction(db.Model):
 
     def __repr__(self):
         return f'<Photo ID & Title: {self.id} {self.title}>'
-
