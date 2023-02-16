@@ -15,18 +15,39 @@
 {% endif %}
 
 <p>
-Welcome to {{ current_user.username }}'s profile.
+Welcome to {{ user.username }}'s profile.
 </p>
 
 <p>
-    <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
+    <img class="Profile-Picture" src="{{ user.profile_pic }}" alt="Profile Picture">
 </p>
-<p>Name: {{current_user.username}}</p>
-<p>Quit Date: {{ current_user.quit_date }}</p>
-<p>Number of Days Smoke Free: {{ smoke_free_days }}</p>
-<p>Total Money Saved (on average): $x.xx</p>
+<p>Name: {{user.username}}</p>
+<p>Quit Date: {{ user.quit_date }}</p>
+<p>Number of Days Smoke Free: {{ (datetime.utcnow().date() - user.quit_date).days }} </p>
+<p>Total Money Saved: ${{ (user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - user.quit_date).days }} </p>
+{% set health_facts = [
+    "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
+    "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
+    "Within 2-12 weeks of quitting, your circulation improves and lung function increases.",
+    "Within 1-9 months of quitting, coughing and shortness of breath decrease.",
+    "Within 1-2 years of quitting, your risk of heart attack drops dramatically."
+    "Within 5-15 years of quitting, your risk of stroke is the same as that of a non-smoker.",
+    "Within 10 years of quitting, your risk of lung cancer is about half that of a person who is still smoking (after 10 to 15 years). Your risk of cancer of the bladder, esophagus, and kidney decreases.",
+    "Within 15 years of quitting, your risk of coronary heart disease is close to that of a non-smoker.",
+    "Smokers have a greater risk of developing a severe case and dying from COVID-19.",
+    "Tobacco makes your skin wrinkly, making you look older faster. Smoking prematurely ages the skin by wearing away proteins that give the skin elasticity, depleting it of vitamin A and restricting blood flow.",
+    "Smokers’ children suffer reduced lung function, which continues to affect them in the form of chronic respiratory disorders in adulthood.",
+    "Smokers are more likely to experience infertility. Quitting smoking reduces difficulty getting pregnant, having premature births, babies with low birth weights and miscarriage.",
+    "Smoking can cause erectile dysfunction. Smoking restricts blood flow to the penis creating an inability to achieve an erection. Erectile dysfunction is more common in smokers and very likely to persist or become permanent unless the man stops smoking early in life.",
+    "One in five tobacco smokers will develop chronic obstructive pulmonary disease (COPD) in their lifetime, especially people who start smoking during their childhood and teenage years, since tobacco smoke significantly slows lung growth and development.",
+    "Smokers are at a significantly higher risk of developing acute myeloid leukaemia; cancer of the nasal and paranasal sinus cavities; colorectal, kidney, liver, pancreatic, stomach or ovarian cancer; and cancer of the lower urinary tract (including the bladder, ureter and renal pelvis)."
+    ] %}
+<p>Today's Health Fact:</p>
+<ul></ul>
+<li>{{ health_facts[random.randint(0, health_facts|length -1)] }}</li>
+</ul>
 
-<p>About Me: {{ current_user.about_me }}</p>
+<p>About Me: {{ user.about_me }}</p>
 <ul>
     <li>All</li>
     <li>Posts</li>

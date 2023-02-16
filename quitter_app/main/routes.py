@@ -1,11 +1,13 @@
 import os
+import random
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from datetime import date, datetime
+from datetime import datetime
 from quitter_app.auth.forms import SignUpForm
 from quitter_app.models import *
 from quitter_app.main.forms import ReactionForm, PostForm, UserForm
 from flask_login import login_user, logout_user, login_required, current_user
 from quitter_app.extensions import app, db, bcrypt
+
 
 main = Blueprint("main", __name__)
 
@@ -20,14 +22,14 @@ def homepage():
     all_posts = Post.query.all()
     all_users = User.query.all()
     return render_template('home.html', 
-        all_posts=all_posts, all_users=all_users)
+        all_posts=all_posts, all_users=all_users, datetime=datetime, random=random)
 
 @main.route('/profile/<username>')
 # COMPLETED
 @login_required
-def profile(username):
-    user = User.query.filter_by(username=username)
-    return render_template('profile.html', user=user)
+def user_profile(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template('profile.html', user=user, datetime=datetime, random=random)
 
 
 @main.route('/new_post', methods=['GET', 'POST'])
@@ -68,7 +70,7 @@ def user_detail(user_id):
         return redirect(url_for('main.profile', username=user.username))
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('user_detail.html', user=user, form=form)
+    return render_template('user_detail.html', user=user, form=form, datetime=datetime, random=random)
 
 @main.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required
@@ -98,7 +100,32 @@ def post_detail(post_id):
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
 @login_required
+def delete_account(post_id):
+    post = Post.query.get(post_id)
+    # Stretch - delete the item
+    try:
+        db.session.delete(post)
+        db.session.commit()
+        flash('Successfully deleted {} post'.format(post))
+        return redirect(url_for('main.homepage'))
+    finally:
+        flash(' ')
+
+@main.route('/delete/<post_id>', methods=['GET', 'POST'])
+@login_required
 def delete_post(post_id):
+    post = Post.query.get(post_id)
+    # Stretch - delete the item
+    try:
+        db.session.delete(post)
+        db.session.commit()
+        flash('Successfully deleted {} post'.format(post))
+        return redirect(url_for('main.homepage'))
+    finally:
+        flash(' ')
+@main.route('/delete/<post_id>', methods=['GET', 'POST'])
+@login_required
+def delete_reaction(post_id):
     post = Post.query.get(post_id)
     # Stretch - delete the item
     try:

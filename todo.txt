@@ -7,6 +7,8 @@ DONE - auth/login route
 DONE - auth/logout route
 DONE - main/homepage route
 DONE - main/profile route
+DONE - display # days smoke free and total money saved calculations (once signed in)
+DONE - display random health fact (once signed in)
 
 
 TODO - main/new_post route

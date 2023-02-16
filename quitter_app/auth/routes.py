@@ -1,6 +1,7 @@
 import os
+import random
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from datetime import date, datetime
+from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
 from quitter_app.models import *
 from quitter_app.auth.forms import SignUpForm, LoginForm
@@ -12,7 +13,6 @@ auth = Blueprint("auth", __name__)
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # TODO: Fill out this route!
     form = SignUpForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -32,7 +32,7 @@ def signup():
         db.session.commit()
         flash('Account Created.')
         return redirect(url_for('auth.login'))
-    return render_template('signup.html', form=form)
+    return render_template('signup.html', form=form, datetime=datetime, random=random)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,7 +42,7 @@ def login():
         login_user(user, remember=True)
         next_page = request.args.get('next')
         return redirect(next_page if next_page else url_for('main.homepage'))
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, datetime=datetime, random=random)
 
 @auth.route('/logout')
 @login_required
