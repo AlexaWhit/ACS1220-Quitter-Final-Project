@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<link rel="stylesheet" href="/static/style.css?v=1.0.0">
 <nav>
     <a href="/">Home</a>
     <div>
@@ -19,11 +19,27 @@
     </div>
 </nav>
 
-<h1>Homepage</h1>
+<div class="welcome">
+<h1>Join Quitter!</h1>
+<p>Quit smoking with the support of our community. Our app provides a safe and 
+    welcoming space for you to share your experiences, offer and receive support, 
+    and celebrate your successes.</p>
+</div>
 
-<p><em>Quit once and for all with the help of others! Get inspiration, voice 
-    frustration, and maintain motiviation with the help of real people going through
-    the same journey!
+<p><em>
+    {% if current_user.is_authenticated %}
+    <p>
+        Welcome back, {{ current_user.username }}!
+        </p>
+        
+        <p>
+            <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
+        </p>
+        <p>Quit Date: {{ current_user.quit_date }}</p>
+        <p>Number of Days Smoke Free: __ </p>
+        <p>Total Money Saved: $_.__</p>
+        <P>Random Uplifting Health Fact Here?</P>
+        
 </em></p>
 
 <h2>Users:</h2>
@@ -33,6 +49,7 @@
         <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
     {% endfor %}
 </ul>
+
 
 <h2>Your Friends:</h2>
 
@@ -49,5 +66,5 @@
     <p><strong>Body:</strong> {{ post.body }}</p>
 </div>
 {% endfor %}
-
+{% endif %}
 {% endblock %}

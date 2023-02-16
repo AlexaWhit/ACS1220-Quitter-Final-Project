@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 # Authentication
 ###########################
 
-# TODO: Add authentication setup code here!
+# Authentication Setup Code
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
@@ -26,3 +26,22 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 bcrypt = Bcrypt(app)
+
+###########################
+# Main
+###########################
+
+#  Main Blueprint
+
+from quitter_app.main.routes import main
+app.register_blueprint(main)
+
+with app.app_context(): 
+    db.create_all()
+
+# Auth Blueprint
+from quitter_app.auth.routes import auth
+app.register_blueprint(auth)
+
+with app.app_context(): 
+    db.create_all()

@@ -1,0 +1,27 @@
+TODO:
+DONE - styling (not needed)
+DONE - At least 3 models (including User model)
+DONE - At least 3 forms (including login/signup)
+DONE - auth/sign up route
+DONE - auth/login route
+DONE - auth/logout route
+DONE - main/homepage route
+DONE - main/profile route
+
+
+TODO - main/new_post route
+TODO - main/new_reaction route
+TODO - main/edit_post route
+TODO - main/edit_user route
+TODO - main/edit_reaction route
+TODO - main/delete_user route
+TODO - main/delete_post route
+TODO - main/delete_reaction route
+TODO - main/add_friend route
+TODO - main/remove_friend route
+TODO - show all users and all posts once you log in - new template?
+TODO - show user's friends and their posts on PROFILE page
+TODO - authentication flow
+TODO - at least 6 route tests
+TODO - deployed to Heroku
+TODO - 3 to 4 min video demonstrating the project and code

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<link rel="stylesheet" href="/static/style.css?v=1.0.0">
 
 {% if current_user.is_authenticated %}
 <a href="/">Homepage</a>
@@ -35,7 +36,7 @@
 
 <h2>Update Your Information Here</h2>
 
-<form method="POST" action="{{ url_for('main.profile', username=username) }}">
+<form method="POST" action="{{ url_for('main.profile', username=user.username) }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Please update your user info:</legend>
