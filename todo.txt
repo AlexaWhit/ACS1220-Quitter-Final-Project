@@ -9,11 +9,12 @@ DONE - main/homepage route
 DONE - main/profile route
 DONE - display # days smoke free and total money saved calculations (once signed in)
 DONE - display random health fact (once signed in)
+DONE - main/new_post route
+DONE - main/edit_post route
 
 
-TODO - main/new_post route
+TODO - List all current_user's posts on their profile. Maybe link to it??
 TODO - main/new_reaction route
-TODO - main/edit_post route
 TODO - main/edit_user route
 TODO - main/edit_reaction route
 TODO - main/delete_user route

@@ -57,27 +57,27 @@ def new_post():
     # TODO: Send the form to the template and use it to render the form fields
     return render_template('new_post.html', form=form)
 
-# @main.route('/new_reaction', methods=['GET', 'POST'])
-# # NEEDS WORK
-# @login_required
-# def new_reaction():
-#     form = PostForm()
+@main.route('/post/<post_id>/reaction/new', methods=['GET', 'POST'])
+# NEEDS WORK
+@login_required
+def new_reaction(post_id):
+    form = ReactionForm()
 
-#     if form.validate_on_submit():
-#         new_post = Reaction(
-#             reaction=form.reaction.data,
-#             comment=form.comment.data,
-#             photo_url=form.photo_url.data,
-#             created_by=current_user,
-#         )
-#         db.session.add(new_reaction)
-#         db.session.commit()
+    if form.validate_on_submit():
+        new_reaction = Reaction(
+            reaction=form.reaction.data,
+            comment=form.comment.data,
+            photo_url=form.photo_url.data,
+            created_by=current_user,
+        )
+        db.session.add(new_reaction)
+        db.session.commit()
 
-#         flash(f'Success! Your reaction was created successfully.')
-#         return redirect(url_for('main.homepage'))
+        flash(f'Success! Your reaction was created successfully.')
+        return redirect(url_for('main.post_detail', post_id=post_id))
 
-#     # TODO: Send the form to the template and use it to render the form fields
-#     return render_template('edit_post.html', form=form)
+    # TODO: Send the form to the template and use it to render the form fields
+    return render_template('new_reaction.html', form=form)
 
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
 # NEED TO WORK ON THE FORM
