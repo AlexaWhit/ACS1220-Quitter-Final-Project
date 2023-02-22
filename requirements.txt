@@ -1,7 +1,7 @@
 bcrypt==3.2.0
 cffi==1.14.4
 click==7.1.2
-Gunicorn==20.0.4
+Gunicorn==20.1.0
 Flask==1.1.2
 Flask-Bcrypt==0.7.1
 Flask-Login==0.5.0
