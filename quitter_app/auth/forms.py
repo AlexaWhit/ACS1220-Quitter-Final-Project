@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, DateField, IntegerField, TextAreaField
-from wtforms.validators import DataRequired, Length, ValidationError, URL, Email
+from wtforms.validators import DataRequired, Length, ValidationError, URL
 from quitter_app.models import User
 from quitter_app.extensions import *
 
@@ -11,7 +11,7 @@ class SignUpForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
-    email = StringField('Email', validators=[Email(), DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
     birth_date = DateField('Date of Birth', validators=[DataRequired()])
     quit_date = DateField('Quit Date', validators=[DataRequired()])
     avg_cigs = IntegerField('Average Cigarettes Smoked per Day', validators=[DataRequired()])
