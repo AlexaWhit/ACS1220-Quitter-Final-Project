@@ -69,7 +69,7 @@ class Post(db.Model):
     title = db.Column(db.String(200), nullable=False)
     audience = db.Column(db.Enum(Purpose))
     body = db.Column(db.String(8000), nullable=False)
-    photo_url = db.Column(URLType)
+    photo_url = db.Column(db.String(8000))
     created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_by = db.relationship('User')
     # post = db.relationship('User', back_populates='posts')

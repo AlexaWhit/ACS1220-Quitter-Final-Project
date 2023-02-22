@@ -19,33 +19,48 @@
   </div>
 </nav>
 
-<h1>New Post</h1>
+<h1>Post Detail</h1>
+<h2>Post - {{ post.title }}</h2>
+<p>see comments, likes, date posted, user who posted, timestamp, etc</p>
 
-<p>Form to create new post will be here</p>
+{{ post.audience }}
+{{ post.body }}
 
-<form method="POST" action="{{ url_for('main.new_post') }}">
+<h2>Items</h2>
+
+<div class="reactions">
+  {% for reaction in post.reactions %}
+  <div class="edit-post">
+    <a href="/post/{{ post.id }}"
+      ><img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />
+      <p><strong>{{ post.title }}</strong></p></a>
+ 
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Edit Post</h2>
+
+<form method="POST" action="{{ url_for('main.edit_post', post_id=post.id) }}">
   {{ form.csrf_token }}
   <fieldset>
-    <legend>Enter the following information</legend>
-    {{ form.title.label }} {{ form.title }}
+    <legend>Please update the store information:</legend>
 
-    <!-- Show form errors -->
-    <ul>
-      {% for error in form.errors %}
-      <li class="error">{{ error }}</li>
-      {% endfor %}
-    </ul>
+    {{ form.title.label }} 
+    {{ form.title }}
 
     {{ form.audience.label }} 
-    {{ form.audience }}
-    
+    {{ form.audience }} 
+
     {{ form.body.label }} 
-    {{ form.body }}
-    
+    {{ form.body }} 
+
     {{ form.photo_url.label }} 
     {{ form.photo_url }} 
-    
+
     {{ form.submit }}
+
+    {{ form.delete }}
   </fieldset>
 </form>
 
