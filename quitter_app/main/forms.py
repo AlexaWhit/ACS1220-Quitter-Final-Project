@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SelectField, SubmitField, FloatField, PasswordField, TextAreaField, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.validators import DataRequired, Length, URL, Length, ValidationError, Email, URL
+from wtforms.validators import DataRequired, Length, URL, Length, ValidationError, URL
 from quitter_app.models import User, Post, Reaction, Purpose, ReactionEmoji
 from quitter_app.extensions import bcrypt
 
@@ -13,7 +13,7 @@ class UserForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Post Title', validators=[DataRequired()])
-    email = StringField('Email', validators=[Email(), DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
     birth_date = DateField('Date of Birth', validators=[DataRequired()])
     quit_date = DateField('Quit Date', validators=[DataRequired()])
     avg_cigs = IntegerField('Average Cigs', validators=[DataRequired()])
