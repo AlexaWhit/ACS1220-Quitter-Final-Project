@@ -36,7 +36,7 @@
 
 <h2>Update Your Information Here</h2>
 
-<form method="POST" action="{{ url_for('main.edit_profile', user_id=user.id) }}">
+<form method="POST" action="{{ url_for('main.edit_profile', user_id=current_user.id) }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Please update your user info:</legend>

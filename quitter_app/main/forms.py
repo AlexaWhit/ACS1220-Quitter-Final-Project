@@ -6,17 +6,16 @@ from quitter_app.models import User, Post, Reaction, Purpose, ReactionEmoji
 from quitter_app.extensions import bcrypt
 
 class UserForm(FlaskForm):
-    """Form for adding/updating a user."""
+    """Form for updating a user."""
 
-    username = StringField('User Name',
-        validators=[DataRequired(), Length(min=3, max=50)])
-    password = PasswordField('Password', validators=[DataRequired()])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Post Title', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    birth_date = DateField('Date of Birth', validators=[DataRequired()])
-    quit_date = DateField('Quit Date', validators=[DataRequired()])
-    avg_cigs = IntegerField('Average Cigs', validators=[DataRequired()])
+    username = StringField('User Name')
+    password = PasswordField('Password')
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
+    email = StringField('Email')
+    birth_date = DateField('Date of Birth')
+    quit_date = DateField('Quit Date')
+    avg_cigs = IntegerField('Average Cigs')
     about_me = TextAreaField('About Me')
     profile_pic = StringField('Profile Picture', validators=[URL()])
     submit = SubmitField('Submit')

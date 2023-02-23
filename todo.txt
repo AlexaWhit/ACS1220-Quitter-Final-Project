@@ -9,22 +9,24 @@ DONE - main/homepage route
 DONE - main/profile route
 DONE - display # days smoke free and total money saved calculations (once signed in)
 DONE - display random health fact (once signed in)
+DONE - show all users and all posts once you log in
 DONE - main/new_post route
 DONE - main/edit_post route
+DONE - main/edit_user route
+DONE - main/delete_post route
+DONE - deployed to Render
+DONE - List all current_user's posts on their profile. 
+DONE - deployed to Render
 
 
-TODO - List all current_user's posts on their profile. Maybe link to it??
 TODO - main/new_reaction route
-TODO - main/edit_user route
 TODO - main/edit_reaction route
-TODO - main/delete_user route
-TODO - main/delete_post route
 TODO - main/delete_reaction route
+TODO - main/delete_profile route?
 TODO - main/add_friend route
 TODO - main/remove_friend route
-TODO - show all users and all posts once you log in - new template?
-TODO - show user's friends and their posts on PROFILE page
+TODO - show user's friends and their posts on PROFILE page?
+TODO - see comments, likes, date posted, user who posted, timestamp, etc
 TODO - authentication flow
 TODO - at least 6 route tests
-TODO - deployed to Heroku
 TODO - 3 to 4 min video demonstrating the project and code

@@ -54,11 +54,10 @@ def new_post():
         flash(f'Success! Your post was created successfully.')
         return redirect(url_for('main.homepage'))
 
-    # TODO: Send the form to the template and use it to render the form fields
+
     return render_template('new_post.html', form=form)
 
 @main.route('/post/<post_id>/reaction/new', methods=['GET', 'POST'])
-# NEEDS WORK
 @login_required
 def new_reaction(post_id):
     form = ReactionForm()
@@ -76,26 +75,22 @@ def new_reaction(post_id):
         flash(f'Success! Your reaction was created successfully.')
         return redirect(url_for('main.post_detail', post_id=post_id))
 
-    # TODO: Send the form to the template and use it to render the form fields
     return render_template('new_reaction.html', form=form)
 
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
-# NEED TO WORK ON THE FORM
 @login_required
 def edit_profile(user_id):
     user = User.query.get(user_id)
-    form = SignUpForm(obj=user)
+    form = UserForm(obj=user)
  
     if form.validate_on_submit():
         form.populate_obj(user)
         db.session.add(user)
         db.session.commit()
 
-# THIS PART ISN'T LOADING ONCE THE USER CLICKS THE SUBMIT BUTTON
         flash(f'Good News! {user.username} was UPDATED successfully.')
-        return redirect(url_for('main.profile', user_id=user.id))
+        return redirect(url_for('main.user_profile', username=current_user.username))
 
-    # TODO: Send the form to the template and use it to render the form fields
     return render_template('edit_profile.html', user=user, form=form, datetime=datetime, random=random)
 
 @main.route('/post/<post_id>', methods=['GET', 'POST'])
