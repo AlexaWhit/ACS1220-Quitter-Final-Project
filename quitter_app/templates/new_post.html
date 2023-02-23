@@ -21,8 +21,6 @@
 
 <h1>New Post</h1>
 
-<p>Form to create new post will be here</p>
-
 <form method="POST" action="{{ url_for('main.new_post') }}">
   {{ form.csrf_token }}
   <fieldset>

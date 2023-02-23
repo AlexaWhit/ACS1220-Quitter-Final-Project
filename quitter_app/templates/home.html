@@ -21,16 +21,13 @@
 
 <p><em>
     {% if current_user.is_authenticated %}
-    <p>
-        Welcome back, {{ current_user.username }}!
-        </p>
-        
         <p>
             <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
         </p>
         <p>Quit Date: {{ current_user.quit_date }}</p>
         <p>Number of Days Smoke Free: {{ (datetime.utcnow().date() - current_user.quit_date).days }} </p>
         <p>Total Money Saved: ${{ (current_user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - current_user.quit_date).days }} </p>
+
         {% set health_facts = [
             "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
             "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
@@ -78,9 +75,22 @@
     <p><strong>Type:</strong> {{ post.audience }}</p>
     <p>{{ post.body }}</p>
     <img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />
+    <p>Reactions:</p>
+    <ul>
+      {% for reaction in post.reactions %}
+        <li>{{ reaction.reaction }} {{ reaction.comment }} by {{ reaction.created_by.username }}</li>
+      {% endfor %}
+    </ul>
     <form method="GET" action="{{ url_for('main.add_reaction', post_id=post.id) }}">
         <button type="submit" class="btn btn-primary">Add Reaction</button>
+    </form>
+    {% for reaction in post.reactions %}
+    {% if reaction.created_by == current_user %}
+      <form method="GET" action="{{ url_for('main.edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
+          <button type="submit" class="btn btn-primary">Edit Reaction</button>
       </form>
+    {% endif %}
+  {% endfor %}
 </div>
 {% endfor %}
 

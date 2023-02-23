@@ -1,6 +1,8 @@
 import os
+from pdb import post_mortem
 import random
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from urllib import response
+from flask import abort, Blueprint, request, render_template, redirect, url_for, flash
 from datetime import datetime
 from quitter_app.auth.forms import SignUpForm
 from quitter_app.models import *
@@ -21,8 +23,9 @@ def homepage():
     # Print all the posts of users friends
     all_posts = Post.query.all()
     all_users = User.query.all()
+    reactions = Reaction.query.all()
     return render_template('home.html', 
-        all_posts=all_posts, all_users=all_users, datetime=datetime, random=random)
+        all_posts=all_posts, all_users=all_users, reactions=reactions, datetime=datetime, random=random)
 
 @main.route('/profile/<username>')
 # COMPLETED
@@ -30,7 +33,6 @@ def homepage():
 def user_profile(username):
     user = User.query.filter_by(username=username).first()
     posts = Post.query.filter_by(created_by=user).all()
-    print(len(posts))
     return render_template('profile.html', user=user, posts=posts, datetime=datetime, random=random)
 
 
@@ -59,8 +61,8 @@ def new_post():
 
 @main.route('/post/<post_id>/reaction/add', methods=['GET', 'POST'])
 @login_required
+# COMPLETED
 def add_reaction(post_id):
-    print(post_id)
     post = Post.query.get(post_id)
     form = ReactionForm(request.form)
 
@@ -68,7 +70,6 @@ def add_reaction(post_id):
         new_reaction = Reaction(
             reaction=form.reaction.data,
             comment=form.comment.data,
-            photo_url=form.photo_url.data,
             created_by=current_user,
             post=post
         )
@@ -82,6 +83,7 @@ def add_reaction(post_id):
 
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
 @login_required
+# COMPLETED
 def edit_profile(user_id):
     user = User.query.get(user_id)
     form = UserForm(obj=user)
@@ -101,12 +103,12 @@ def edit_profile(user_id):
 # COMPLETED
 def edit_post(post_id):
     post = Post.query.get(post_id)
+    if post.created_by != current_user:
+        abort(403)
     form = PostForm(obj=post)
 
-    # STRETCH - Add delete capability
     if form.delete.data:
         return redirect(url_for('main.delete_post', post_id=post.id)) 
-
 
     if form.validate_on_submit():
         form.populate_obj(post)
@@ -116,8 +118,37 @@ def edit_post(post_id):
         flash(f'Good News! Your post was UPDATED successfully.')
         return redirect(url_for('main.homepage'))
 
-    # TODO: Send the form to the template and use it to render the form fields
     return render_template('edit_post.html', post=post, form=form)
+
+@main.route('/post/<int:post_id>/reaction/<int:reaction_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_reaction(post_id, reaction_id):
+    reaction = Reaction.query.get_or_404(reaction_id)
+    if reaction.created_by != current_user:
+        abort(403)
+    form = ReactionForm(obj=reaction)
+
+    if form.delete.data:
+        return redirect(url_for('main.delete_reaction', reaction_id=reaction.id)) 
+
+    if form.validate_on_submit():
+        new_reaction = Reaction(
+            reaction=form.reaction.data,
+            comment=form.comment.data,
+            created_by=current_user,
+            timestamp = datetime.utcnow()
+        )
+        db.session.add(new_reaction)
+        db.session.commit()
+        db.session.commit()
+        flash('Your reaction has been updated!', 'success')
+        return redirect(url_for('post', post_id=post_id))
+
+    elif request.method == 'GET':
+        form.comment.data = reaction.comment
+
+    return render_template('edit_reaction.html', title='Edit Reaction', form=form)
+
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
 @login_required
@@ -133,10 +164,11 @@ def delete_account(post_id):
         flash(' ')
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
+#COMPLETED
 @login_required
 def delete_post(post_id):
     post = Post.query.get(post_id)
-    # Stretch - delete the item
+
     try:
         db.session.delete(post)
         db.session.commit()
@@ -148,7 +180,7 @@ def delete_post(post_id):
 @login_required
 def delete_reaction(post_id):
     post = Post.query.get(post_id)
-    # Stretch - delete the item
+
     try:
         db.session.delete(post)
         db.session.commit()
@@ -156,3 +188,29 @@ def delete_reaction(post_id):
         return redirect(url_for('main.homepage'))
     finally:
         flash(' ')
+
+@main.route('/add_friend/<user_id>', methods=['POST'])
+@login_required
+def add_friend(user_id):
+    user = User.query.get(user_id)
+
+    if user not in current_user.friend_list:
+        current_user.friend_list.append(user)
+        db.session.commit()
+        flash(f'Success! {user.username} has been ADDED to your shopping list!')  
+        return redirect(url_for('main.user_profile', user_id=user.id)) 
+    else:   
+        return "ERROR!"
+
+@main.route('/remove_friend/<user_id>', methods=['POST'])
+@login_required
+def remove_friend(user_id):
+    user = User.query.get(user_id)
+
+    if user in current_user.friend_list:
+        current_user.friend_list.remove(user)
+        db.session.commit()
+        flash(f'Success! {user.username} has been REMOVED from your friend list!')   
+        return redirect(url_for('main.user_profile', user_id=user.id)) 
+    else:   
+        return "ERROR!"

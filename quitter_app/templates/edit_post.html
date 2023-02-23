@@ -20,24 +20,19 @@
 </nav>
 
 <h1>Post Detail</h1>
-<h2>Post - {{ post.title }}</h2>
-<p>see comments, likes, date posted, user who posted, timestamp, etc</p>
+<h2>{{ post.title }}</h2>
+<p>Type of post: <strong>{{ post.audience }} </strong>
+  <br />
+  <br />
+Content: {{ post.body }}
+</p>
 
-{{ post.audience }}
-{{ post.body }}
-
-<h2>Items</h2>
-
-<div class="reactions">
+<p>Reactions:</p>
+<ul>
   {% for reaction in post.reactions %}
-  <div class="edit-post">
-    <a href="/post/{{ post.id }}"
-      ><img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />
-      <p><strong>{{ post.title }}</strong></p></a>
- 
-  </div>
+    <li>{{ reaction.reaction }} {{ reaction.comment }} by {{ reaction.created_by.username }}</li>
   {% endfor %}
-</div>
+</ul>
 
 <h2>Edit Post</h2>
 

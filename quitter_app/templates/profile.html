@@ -14,6 +14,17 @@
 <a href="/logout">Logout</a>
 {% endif %}
 
+{% if current_user.is_authenticated %} 
+<form action="/add_friend/{{ user.username }}" method="POST">
+    <input type="submit" value="Add Friend">
+</form>
+
+
+<form action="/remove_friend/{{ user.username}}" method="POST">
+    <input type="submit" value="Remove Friend">
+</form>
+{% endif %}
+
 <p>
 Welcome to {{ user.username }}'s profile.
 </p>
@@ -55,4 +66,15 @@ Welcome to {{ user.username }}'s profile.
     </div>
     {% endfor %}
 </ul>
+
+<p>
+    YOUR FRIENDS:
+
+    <ul>
+        {% for user in current_user.friend_list %}
+        <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
+        {% endfor %}
+    </ul>
+    
+</p>
 {% endblock %}

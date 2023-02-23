@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<nav>
+    <a href="/">Home</a>
+    <div>
+        {% if current_user.is_authenticated %}
+            <a href="/new_post">New Post</a>
+        <br>
+            <a href="/new_friend">Add Friend</a>
+        <br>
+            <a href="/profile/{{current_user.username}}">View Profile</a>
+        <br>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/signup">Sign Up</a>
+            <a href="/login">Log In</a>
+        {% endif %}
+    </div>
+  </nav>
+
+<h1 class="mb-3">Edit Reaction</h1>
+  <div class="row">
+      <div class="col-md-8">
+          <form method="POST" action="{{ url_for('edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
+              {{ form.hidden_tag() }}
+              <div class="form-group">
+                  <label for="comment">Comment</label>
+                  {{ form.comment(class="form-control", id="comment", rows="3") }}
+              </div>
+              <button type="submit" class="btn btn-primary mt-2">Edit Reaction</button>
+          </form>
+      </div>
+  </div>
+
+{% endblock %}
