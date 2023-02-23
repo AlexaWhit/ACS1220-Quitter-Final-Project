@@ -78,6 +78,9 @@
     <p><strong>Type:</strong> {{ post.audience }}</p>
     <p>{{ post.body }}</p>
     <img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />
+    <form method="GET" action="{{ url_for('main.add_reaction', post_id=post.id) }}">
+        <button type="submit" class="btn btn-primary">Add Reaction</button>
+      </form>
 </div>
 {% endfor %}
 

@@ -57,10 +57,12 @@ def new_post():
 
     return render_template('new_post.html', form=form)
 
-@main.route('/post/<post_id>/reaction/new', methods=['GET', 'POST'])
+@main.route('/post/<post_id>/reaction/add', methods=['GET', 'POST'])
 @login_required
-def new_reaction(post_id):
-    form = ReactionForm()
+def add_reaction(post_id):
+    print(post_id)
+    post = Post.query.get(post_id)
+    form = ReactionForm(request.form)
 
     if form.validate_on_submit():
         new_reaction = Reaction(
@@ -68,14 +70,15 @@ def new_reaction(post_id):
             comment=form.comment.data,
             photo_url=form.photo_url.data,
             created_by=current_user,
+            post=post
         )
         db.session.add(new_reaction)
         db.session.commit()
 
         flash(f'Success! Your reaction was created successfully.')
-        return redirect(url_for('main.post_detail', post_id=post_id))
+        return redirect(url_for('main.homepage'))
 
-    return render_template('new_reaction.html', form=form)
+    return render_template('add_reaction.html', form=form, post=post)
 
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
 @login_required

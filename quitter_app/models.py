@@ -1,6 +1,7 @@
 from sqlalchemy_utils import URLType
 from sqlalchemy.orm import backref 
 from flask_login import UserMixin, current_user 
+from datetime import datetime
 from quitter_app.extensions import db
 from quitter_app.utils import FormEnum
 
@@ -23,20 +24,6 @@ friends = db.Table('friends',
     db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
 )
 
-class Friend(db.Model):
-    """Friend model."""
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', foreign_keys=[user_id], back_populates='friends')
-    friend = db.relationship('User', foreign_keys=[friend_id], back_populates='friend_of')
-
-    def __str__(self):
-        return f'<Friendship between {self.user.username} and {self.friend.username}>'
-
-    def __repr__(self):
-        return f'<Friendship between {self.user.username} and {self.friend.username}>'
-
 class User(UserMixin, db.Model):
     """User model."""
     id = db.Column(db.Integer, primary_key=True)
@@ -52,8 +39,11 @@ class User(UserMixin, db.Model):
     profile_pic = db.Column(URLType)
     posts = db.relationship('Post', back_populates='created_by')
     reactions = db.relationship('Reaction', back_populates='created_by')
-    friends = db.relationship('Friend', foreign_keys=[Friend.user_id], back_populates='user')
-    friend_of = db.relationship('Friend', foreign_keys=[Friend.friend_id], back_populates='friend')
+    friends = db.relationship('User', secondary=friends,
+                              primaryjoin=(friends.c.user_id == id),
+                              secondaryjoin=(friends.c.friend_id == id),
+                              backref=db.backref('friend_of', lazy='dynamic'),
+                              lazy='dynamic')
 
 
     def __str__(self):
@@ -70,9 +60,9 @@ class Post(db.Model):
     audience = db.Column(db.Enum(Purpose))
     body = db.Column(db.String(8000), nullable=False)
     photo_url = db.Column(db.String(8000))
-    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_by = db.relationship('User')
-    # post = db.relationship('User', back_populates='posts')
+    reactions = db.relationship('Reaction', back_populates='post', lazy=True)
 
     def __str__(self):
         return f'<Post ID & Title: {self.id} {self.title}>'
@@ -88,10 +78,6 @@ class Reaction(db.Model):
     photo_url = db.Column(URLType)
     created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_by = db.relationship('User')
-    # post_reactions = db.relationship('Post', secondary='User', back_populates='posts')
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    post = db.relationship('Post', back_populates='reactions')
 
-    def __str__(self):
-        return f'<Photo ID & Title: {self.id} {self.title}>'
-
-    def __repr__(self):
-        return f'<Photo ID & Title: {self.id} {self.title}>'
