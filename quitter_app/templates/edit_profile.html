@@ -27,7 +27,7 @@
 <p><strong>Email: </strong> {{ current_user.email}}</p>
 <p><strong>Birth Date: </strong> {{ current_user.birth_date }}</p>
 <p><strong>Quit Date: </strong> {{ current_user.quit_date }}</p>
-<p><strong>Average Cigarettes Smoked/Day: </strong> {{ current_user.abg_cigs}}</p>
+<p><strong>Average Cigarettes Smoked/Day: </strong> {{ current_user.avg_cigs}}</p>
 <p><strong>About Me:</strong> {{ current_user.about_me }}</p>
 
 
@@ -36,7 +36,7 @@
 
 <h2>Update Your Information Here</h2>
 
-<form method="POST" action="{{ url_for('main.profile', username=user.username) }}">
+<form method="POST" action="{{ url_for('main.edit_profile', user_id=user.id) }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Please update your user info:</legend>

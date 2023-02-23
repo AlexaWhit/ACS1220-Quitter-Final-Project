@@ -2,9 +2,9 @@
 {% block content %}
 <link rel="stylesheet" href="/static/style.css?v=1.0.0">
 <nav>
-    <a href="/">Home</a>
-    <div>
+    <div class="navbar">
         {% if current_user.is_authenticated %}
+            <a href="/">Home</a>
             <a href="/new_post">New Post</a>
         <br>
             <a href="/new_friend">Add Friend</a>
@@ -80,5 +80,19 @@
     <img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />
 </div>
 {% endfor %}
+
+{% else %}
+<div class="welcome">
+    <h1>Welcome to Quitter!</h1>
+    <img src="https://copd.net/wp-content/uploads/2020/08/COPD-18764-living-quitting-smoking-together.gif" alt="quit-smoking" justify-content="center" width="600px" height="250px"/>
+    <p>Whether you have just started your journey to quit smoking or you have been smoke-free for a while, we are here to support you and 
+        connect you with other quitters who understand what you are going through.
+        Our website is a place where you can:
+            <li>find helpful resources</li>
+            <li>share your progress and experiences</li>
+            <li>receive support and encouragement from others who have gone through the same struggles</li>
+          
+            Join us and let us help you live a healthier and happier life without cigarettes!</p>
+</div>
 {% endif %}
 {% endblock %}

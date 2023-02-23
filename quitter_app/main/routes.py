@@ -82,7 +82,7 @@ def new_reaction(post_id):
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
 # NEED TO WORK ON THE FORM
 @login_required
-def edit_user(user_id):
+def edit_profile(user_id):
     user = User.query.get(user_id)
     form = SignUpForm(obj=user)
  
@@ -93,10 +93,10 @@ def edit_user(user_id):
 
 # THIS PART ISN'T LOADING ONCE THE USER CLICKS THE SUBMIT BUTTON
         flash(f'Good News! {user.username} was UPDATED successfully.')
-        return redirect(url_for('main.profile', username=user.username))
+        return redirect(url_for('main.profile', user_id=user.id))
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('user_detail.html', user=user, form=form, datetime=datetime, random=random)
+    return render_template('edit_profile.html', user=user, form=form, datetime=datetime, random=random)
 
 @main.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required

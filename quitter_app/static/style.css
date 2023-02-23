@@ -3,14 +3,14 @@ body {
   flex-direction: column;
   align-items: center;
   background: radial-gradient(#87cefa, #9370db, #87cefa);
-  font-family: "Open Sans", sans-serif;
+  font-family: Roboto;
   min-height: 100vh;
 }
 
 #content {
   width: 70%;
-  max-width: 800px;
-  min-width: 500px;
+  max-width: auto;
+  min-width: 800px;
   background-color: white;
   padding: 40px;
   border: 15px solid rgb(255, 111, 0);
@@ -25,7 +25,7 @@ body {
 }
 
 h1 {
-  color: rgb(5, 55, 147);
+  color: blue;
 }
 
 .logo b {
@@ -33,7 +33,7 @@ h1 {
   color: #fee;
   position: relative;
   justify-content: center;
-  padding-left: 1.3em;
+  padding-left: 1em;
   text-align: center;
   text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff6700, 0 0 0.5em #fe8802,
     0 0 0.1em #fe3403, 0 10px 3px #000;
@@ -127,3 +127,80 @@ input[type="submit"] {
 li.error {
   color: red;
 }
+
+.navbar a {
+  color: rgb(71, 16, 153);
+  background-color: lightsalmon;
+  width: 70px;
+  border-radius: 20%;
+  margin-right: 10rem;
+  margin-left: 7rem;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* .welcome {
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.welcome p {
+  font: "Pacifico";
+}
+
+.welcome li {
+  text-align: left;
+} */
+
+.welcome {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcome p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-right: 2rem;
+}
+
+.welcome ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.welcome li {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.welcome a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.welcome a:hover {
+  color: #555;
+}
+
+.welcome .image {
+  max-width: 400px;
+  height: auto;
+  margin-left: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
