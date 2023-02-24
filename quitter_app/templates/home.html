@@ -25,9 +25,13 @@
             <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
         </p>
         <p>Quit Date: {{ current_user.quit_date }}</p>
+        {% if current_user.quit_date %}
         <p>Number of Days Smoke Free: {{ (datetime.utcnow().date() - current_user.quit_date).days }} </p>
+        {% endif %}
+        {% if current_user.avg_cigs %}
         <p>Total Money Saved: ${{ (current_user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - current_user.quit_date).days }} </p>
-
+        {% endif %}
+        
         {% set health_facts = [
             "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
             "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
