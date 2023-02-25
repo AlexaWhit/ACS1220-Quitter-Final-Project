@@ -124,6 +124,7 @@ def edit_post(post_id):
 @login_required
 def edit_reaction(post_id, reaction_id):
     reaction = Reaction.query.get_or_404(reaction_id)
+    post = reaction.post
     if reaction.created_by != current_user:
         abort(403)
     form = ReactionForm(obj=reaction)
@@ -132,22 +133,19 @@ def edit_reaction(post_id, reaction_id):
         return redirect(url_for('main.delete_reaction', reaction_id=reaction.id)) 
 
     if form.validate_on_submit():
-        new_reaction = Reaction(
-            reaction=form.reaction.data,
-            comment=form.comment.data,
-            created_by=current_user,
-            timestamp = datetime.utcnow()
-        )
-        db.session.add(new_reaction)
+        form.populate_obj(reaction)
+        db.session.add(reaction)
         db.session.commit()
+
         db.session.commit()
-        flash('Your reaction has been updated!', 'success')
-        return redirect(url_for('post', post_id=post_id))
+        flash(f'Good News! Your reaction was UPDATED successfully.')
+        print("Form submitted successfully!")
+        return redirect(url_for('main.post', post_id=post_id), code=302)
 
     elif request.method == 'GET':
         form.comment.data = reaction.comment
 
-    return render_template('edit_reaction.html', title='Edit Reaction', form=form)
+    return render_template('edit_reaction.html', title='Edit Reaction', form=form, post=post, reaction=reaction)
 
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
@@ -189,16 +187,16 @@ def delete_reaction(post_id):
     finally:
         flash(' ')
 
-@main.route('/add_friend/<user_id>', methods=['POST'])
+@main.route('/add_friend/username', methods=['GET', 'POST'])
 @login_required
-def add_friend(user_id):
-    user = User.query.get(user_id)
+def add_friend(username):
+    new_friend = User.query.filter_by(username=username).first()
 
-    if user not in current_user.friend_list:
-        current_user.friend_list.append(user)
+    if new_friend not in current_user.friends and new_friend is not None:
+        current_user.friends.append(new_friend)
         db.session.commit()
-        flash(f'Success! {user.username} has been ADDED to your shopping list!')  
-        return redirect(url_for('main.user_profile', user_id=user.id)) 
+        flash(f'Success! {new_friend.username} has been ADDED to your shopping list!')  
+        return redirect(url_for('main.user_profile', username=new_friend.username)) 
     else:   
         return "ERROR!"
 
@@ -207,8 +205,8 @@ def add_friend(user_id):
 def remove_friend(user_id):
     user = User.query.get(user_id)
 
-    if user in current_user.friend_list:
-        current_user.friend_list.remove(user)
+    if user in current_user.friends:
+        current_user.friends.remove(user)
         db.session.commit()
         flash(f'Success! {user.username} has been REMOVED from your friend list!')   
         return redirect(url_for('main.user_profile', user_id=user.id)) 

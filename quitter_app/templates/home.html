@@ -7,8 +7,6 @@
             <a href="/">Home</a>
             <a href="/new_post">New Post</a>
         <br>
-            <a href="/new_friend">Add Friend</a>
-        <br>
             <a href="/profile/{{current_user.username}}">View Profile</a>
         <br>
             <a href="/logout">Logout</a>
@@ -31,7 +29,7 @@
         {% if current_user.avg_cigs %}
         <p>Total Money Saved: ${{ (current_user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - current_user.quit_date).days }} </p>
         {% endif %}
-        
+
         {% set health_facts = [
             "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
             "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
