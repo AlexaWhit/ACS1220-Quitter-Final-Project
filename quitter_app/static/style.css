@@ -209,6 +209,23 @@ img {
   margin-bottom: 10px;
 }
 
+.friend-btn {
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: white;
+  color: rgb(255, 115, 0);
+  border: 1px solid rgb(255, 115, 0);
+}
+
+.friend-btn:hover {
+  background-color: #0062cc;
+  cursor: pointer;
+}
+
 .btn {
   border-radius: 20px;
   padding: 5px 15px;

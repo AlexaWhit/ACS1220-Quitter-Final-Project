@@ -29,4 +29,5 @@ DONE - deployed to Render
 
 TODO - main route tests (total of 7)
 TODO - dummy data into Render 
+TODO - styling
 TODO - 3 to 4 min video demonstrating the project and code
