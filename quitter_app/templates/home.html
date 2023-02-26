@@ -18,19 +18,20 @@
     </div>
 </nav>
 
-<p><em>
+<p>
     {% if current_user.is_authenticated %}
         <p>
             <img class="Profile-Picture" src="{{ current_user.profile_pic }}" alt="Profile Picture">
         </p>
-        <p>Quit Date: {{ current_user.quit_date }}</p>
-        {% if current_user.quit_date %}
-        <p>Number of Days Smoke Free: {{ (datetime.utcnow().date() - current_user.quit_date).days }} </p>
-        {% endif %}
-        {% if current_user.avg_cigs %}
-        <p>Total Money Saved: ${{ (current_user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - current_user.quit_date).days }} </p>
-        {% endif %}
-
+        <div class="stats">
+            <p><em>Quit Date:</em> <strong>{{ current_user.quit_date }}</strong></p>
+            {% if current_user.quit_date %}
+            <p><em>Number of Days Smoke Free:</em> <strong>{{ (datetime.utcnow().date() - current_user.quit_date).days }}</strong> </p>
+            {% endif %}
+            {% if current_user.avg_cigs %}
+            <p><em>Total Money Saved:</em> <strong>${{ (current_user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - current_user.quit_date).days }}</strong> </p>
+            {% endif %}
+        </div>
         {% set health_facts = [
             "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
             "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
@@ -48,12 +49,12 @@
             "One in five tobacco smokers will develop chronic obstructive pulmonary disease (COPD) in their lifetime, especially people who start smoking during their childhood and teenage years, since tobacco smoke significantly slows lung growth and development.",
             "Smokers are at a significantly higher risk of developing acute myeloid leukaemia; cancer of the nasal and paranasal sinus cavities; colorectal, kidney, liver, pancreatic, stomach or ovarian cancer; and cancer of the lower urinary tract (including the bladder, ureter and renal pelvis)."
             ] %}
-        <p>Today's Health Fact:</p>
-        <ul></ul>
-        <li>{{ health_facts[random.randint(0, health_facts|length -1)] }}</li>
+        <p><strong>Today's Health Fact:</strong></p>
+        <ul>
+        {{ health_facts[random.randint(0, health_facts|length -1)] }}
         </ul>
         
-</em></p>
+</p>
 
 <h2>Users:</h2>
 

@@ -226,6 +226,28 @@ img {
   cursor: pointer;
 }
 
+.edit-profile-btn{
+  border-radius: 20px;
+  padding: 10px;
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  margin-top: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: white;
+  color: rgb(255, 115, 0);
+  border: 1px solid rgb(255, 115, 0);
+}
+
+.edit-profile-btn:hover {
+  background-color: #0062cc;
+  cursor: pointer;
+}
+
 .btn {
   border-radius: 20px;
   padding: 5px 15px;
@@ -249,6 +271,15 @@ img {
   max-width: 800px;
   justify-content: center;
   align-items: center;
+}
+
+.stats {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: 4px solid lavender;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 

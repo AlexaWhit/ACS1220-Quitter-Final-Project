@@ -18,9 +18,7 @@ main = Blueprint("main", __name__)
 ##########################################
 
 @main.route('/')
-# COMPLETED
 def homepage():
-    # Print all the posts of users friends
     all_posts = Post.query.all()
     all_users = User.query.all()
     reactions = Reaction.query.all()
@@ -28,16 +26,13 @@ def homepage():
         all_posts=all_posts, all_users=all_users, reactions=reactions, datetime=datetime, random=random)
 
 @main.route('/profile/<username>')
-# COMPLETED
 @login_required
 def user_profile(username):
     user = User.query.filter_by(username=username).first()
     posts = Post.query.filter_by(created_by=user).all()
     return render_template('profile.html', user=user, posts=posts, datetime=datetime, random=random)
 
-
 @main.route('/new_post', methods=['GET', 'POST'])
-# COMPLETED
 @login_required
 def new_post():
     form = PostForm()
@@ -61,7 +56,6 @@ def new_post():
 
 @main.route('/post/<post_id>/reaction/add', methods=['GET', 'POST'])
 @login_required
-# COMPLETED
 def add_reaction(post_id):
     post = Post.query.get(post_id)
     form = ReactionForm(request.form)
@@ -83,9 +77,13 @@ def add_reaction(post_id):
 
 @main.route('/user/<user_id>', methods=['GET', 'POST'])
 @login_required
-# COMPLETED
 def edit_profile(user_id):
+
     user = User.query.get(user_id)
+
+    if user !=current_user:
+        abort(403)
+        
     form = UserForm(obj=user)
  
     if form.validate_on_submit():
@@ -100,7 +98,6 @@ def edit_profile(user_id):
 
 @main.route('/post/<post_id>', methods=['GET', 'POST'])
 @login_required
-# COMPLETED
 def edit_post(post_id):
     post = Post.query.get(post_id)
     if post.created_by != current_user:
@@ -129,9 +126,6 @@ def edit_reaction(post_id, reaction_id):
         abort(403)
     form = ReactionForm(obj=reaction)
 
-    if form.delete.data:
-        return redirect(url_for('main.delete_reaction', reaction_id=reaction.id)) 
-
     if form.validate_on_submit():
         form.populate_obj(reaction)
         db.session.add(reaction)
@@ -150,7 +144,6 @@ def edit_reaction(post_id, reaction_id):
     return render_template('edit_reaction.html', title='Edit Reaction', form=form, post=post, reaction=reaction)
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
-#COMPLETED
 @login_required
 def delete_post(post_id):
     post = Post.query.get(post_id)
@@ -162,26 +155,6 @@ def delete_post(post_id):
         return redirect(url_for('main.homepage'))
     finally:
         flash(' ')
-
-@main.route('/delete/<reaction_id>', methods=['POST'])
-@login_required
-def delete_reaction(reaction_id):
-    reaction = Reaction.query.get_or_404(reaction_id)
-
-    if reaction.created_by != current_user:
-        abort(403)
-
-    try:
-        db.session.delete(reaction)
-        print("Reaction deleted successfully!")
-        db.session.commit()
-        flash('Successfully deleted reaction.')
-    except:
-        db.session.rollback()
-        flash('Could not delete reaction.')
-    
-    return redirect(url_for('main.homepage'))
-
 
 @main.route('/add_friend/<username>', methods=['GET', 'POST'])
 @login_required

@@ -29,6 +29,11 @@
 </form>
 {% endif %}
 
+{% if current_user == user %}
+    <a class="edit-profile-btn" href="{{ url_for('main.edit_profile', user_id=current_user.id) }}">Edit Profile</a>
+{% endif %}
+
+
 <p>
 Welcome to {{ user.username }}'s profile.
 </p>
@@ -36,16 +41,19 @@ Welcome to {{ user.username }}'s profile.
 <p>
     <img class="Profile-Picture" src="{{ user.profile_pic }}" alt="Profile Picture">
 </p>
+<div class="stats">
 <p>Name: <strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
 <p>Quit Date: <strong>{{ user.quit_date }}</strong></p>
+{% if user.quit_date %}
 <p>Number of Days Smoke Free: <strong>{{ (datetime.utcnow().date() - user.quit_date).days }}</strong> </p>
 <p>Total Money Saved: <strong>${{ (user.avg_cigs/20) * 7.50 * (datetime.utcnow().date() - user.quit_date).days }}</strong> </p>
+{% endif %}
 {% set health_facts = [
     "Within 20 minutes of quitting, your heart rate and blood pressure drop.",
     "Within 12 hours of quitting, the carbon monoxide level in your blood drops to normal.",
     "Within 2-12 weeks of quitting, your circulation improves and lung function increases.",
     "Within 1-9 months of quitting, coughing and shortness of breath decrease.",
-    "Within 1-2 years of quitting, your risk of heart attack drops dramatically."
+    "Within 1-2 years of quitting, your risk of heart attack drops dramatically.",
     "Within 5-15 years of quitting, your risk of stroke is the same as that of a non-smoker.",
     "Within 10 years of quitting, your risk of lung cancer is about half that of a person who is still smoking (after 10 to 15 years). Your risk of cancer of the bladder, esophagus, and kidney decreases.",
     "Within 15 years of quitting, your risk of coronary heart disease is close to that of a non-smoker.",
@@ -57,12 +65,14 @@ Welcome to {{ user.username }}'s profile.
     "One in five tobacco smokers will develop chronic obstructive pulmonary disease (COPD) in their lifetime, especially people who start smoking during their childhood and teenage years, since tobacco smoke significantly slows lung growth and development.",
     "Smokers are at a significantly higher risk of developing acute myeloid leukaemia; cancer of the nasal and paranasal sinus cavities; colorectal, kidney, liver, pancreatic, stomach or ovarian cancer; and cancer of the lower urinary tract (including the bladder, ureter and renal pelvis)."
     ] %}
-<p>Today's Health Fact:</p>
-<ul></ul>
-<li>{{ health_facts[random.randint(0, health_facts|length -1)] }}</li>
-</ul>
+</div>
 
-<p>About Me: {{ user.about_me }}</p>
+<div class="stats">
+<p><strong>About Me: </strong>{{ user.about_me }}</p>
+</div>
+
+<div class="stats">
+<p><strong>My Posts: </strong></p>
 <ul>
     {% for post in user.posts %} 
     <div class="post">
@@ -70,6 +80,7 @@ Welcome to {{ user.username }}'s profile.
     </div>
     {% endfor %}
 </ul>
+</div>
 
 <p>
     QUITTERS YOU FOLLOW:
