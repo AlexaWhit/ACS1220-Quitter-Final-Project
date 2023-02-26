@@ -2,9 +2,9 @@
 {% block content %}
 
 <nav>
-    <a href="/">Home</a>
-    <div>
+    <div class="navbar">
         {% if current_user.is_authenticated %}
+            <a href="/">Home</a>
             <a href="/new_post">New Post</a>
         <br>
             <a href="/profile/{{current_user.username}}">View Profile</a>
@@ -15,7 +15,7 @@
             <a href="/login">Log In</a>
         {% endif %}
     </div>
-  </nav>
+</nav>
 
 <h1>New Reaction</h1>
 <form method="POST" action="{{ url_for('main.add_reaction', post_id=post.id) }}">

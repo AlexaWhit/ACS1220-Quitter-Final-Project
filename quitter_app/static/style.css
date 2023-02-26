@@ -33,7 +33,7 @@ h1 {
   color: #fee;
   position: relative;
   justify-content: center;
-  padding-left: 1em;
+  padding-left: 1rem;
   text-align: center;
   text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff6700, 0 0 0.5em #fe8802,
     0 0 0.1em #fe3403, 0 10px 3px #000;
@@ -128,79 +128,112 @@ li.error {
   color: red;
 }
 
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
 .navbar a {
-  color: rgb(71, 16, 153);
-  background-color: lightsalmon;
-  width: 70px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  background-color: rgb(255, 111, 0);
   border-radius: 20%;
-  margin-right: 10rem;
-  margin-left: 7rem;
+  margin-right: 2rem;
+  margin-left: 3.5rem;
 }
 
 .navbar a:hover {
   text-decoration: underline;
 }
 
-/* .welcome {
-  display: block;
-  justify-content: center;
+.welcome {
   text-align: center;
 }
 
-.welcome p {
-  font: "Pacifico";
+.card-deck {
+  margin: 2rem auto;
 }
 
-.welcome li {
-  text-align: left;
-} */
+.card {
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: white;
+}
 
-.welcome {
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  font-size: 1rem;
+}
+
+img {
+  display: block;
+  margin: 2rem auto;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.card {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.card-header {
+  padding: 10px;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-body form {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.card-body img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: .7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: rgb(255, 115, 0);
+  color: #fff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #0062cc;
+  cursor: pointer;
+}
+
+.container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 800px;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.welcome p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-right: 2rem;
-}
-
-.welcome ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.welcome li {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.welcome a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.welcome a:hover {
-  color: #555;
-}
-
-.welcome .image {
-  max-width: 400px;
-  height: auto;
-  margin-left: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 
 

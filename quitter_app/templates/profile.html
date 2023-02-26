@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="/static/style.css?v=1.0.0">
 
 <nav>
-    <a href="/">Home</a>
-    <div>
+    <div class="navbar">
         {% if current_user.is_authenticated %}
+            <a href="/">Home</a>
             <a href="/new_post">New Post</a>
         <br>
             <a href="/profile/{{current_user.username}}">View Profile</a>
@@ -16,7 +16,7 @@
             <a href="/login">Log In</a>
         {% endif %}
     </div>
-  </nav>
+</nav>
 
 {% if current_user.is_authenticated %} 
 <form action="{{ url_for('main.add_friend', username=user.username) }}" method="POST">
