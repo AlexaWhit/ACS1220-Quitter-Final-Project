@@ -87,10 +87,10 @@
         <button type="submit" class="btn btn-primary">Add Reaction</button>
     </form>
     {% for reaction in post.reactions %}
-    {% if reaction.created_by == current_user %}
-      <form method="GET" action="{{ url_for('main.edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
-          <button type="submit" class="btn btn-primary">Edit Reaction</button>
-      </form>
+        {% if reaction.created_by == current_user %}
+            <form method="GET" action="{{ url_for('main.edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
+                <button type="submit" class="btn btn-primary">Edit Reaction</button>
+            </form>
     {% endif %}
   {% endfor %}
   </div>
