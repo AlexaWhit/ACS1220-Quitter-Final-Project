@@ -37,7 +37,7 @@ Content: {{ post.body }}
 <form method="POST" action="{{ url_for('main.edit_post', post_id=post.id) }}">
   {{ form.csrf_token }}
   <fieldset>
-    <legend>Please update the store information:</legend>
+    <legend>UPDATE YOUR POST HERE:</legend>
 
     {{ form.title.label }} 
     {{ form.title }}

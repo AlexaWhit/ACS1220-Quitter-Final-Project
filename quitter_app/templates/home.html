@@ -79,7 +79,7 @@
 {% for post in all_posts %} 
 <div class="post">
     <a href="/post/{{ post.id }}">{{ post.title }}</a> - 
-    {{ post.created_by }} 
+    {{ post.created_by.username }} 
     <p><strong>Type:</strong> {{ post.audience }}</p>
     <p>{{ post.body }}</p>
     <img src="{{ post.photo_url }}" alt="{{ post.title }}" width="200px" />

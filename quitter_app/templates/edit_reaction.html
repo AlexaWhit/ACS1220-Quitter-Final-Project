@@ -17,18 +17,28 @@
     </div>
   </nav>
 
-<h1 class="mb-3">Edit Reaction</h1>
-  <div class="row">
-      <div class="col-md-8">
-          <form method="POST" action="{{ url_for('main.edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
-              {{ form.hidden_tag() }}
-              <div class="form-group">
-                  <label for="comment">Comment</label>
-                  {{ form.comment(class="form-control", id="comment", rows="3") }}
-              </div>
-              <button type="submit" class="btn btn-primary mt-2">Submit</button>
-          </form>
-      </div>
-  </div>
+  <p>Reaction:</p>
+  <ul>
+    {% for reaction in post.reactions %}
+      <li>{{ reaction.reaction }} {{ reaction.comment }} by {{ reaction.created_by.username }}</li>
+    {% endfor %}
+  </ul>
+  
+  <h2>Edit Reaction</h2>
+  
+    <form method="POST" action="{{ url_for('main.edit_reaction', post_id=post.id, reaction_id=reaction.id) }}">
+        {{ form.csrf_token }}
+        <fieldset>
+        <legend>UPDATE YOUR REACTION:</legend>
+    
+        {{ form.reaction.label }} 
+        {{ form.reaction }}
+    
+        {{ form.comment.label }} 
+        {{ form.comment }} 
+    
+        {{ form.submit }}
+        </fieldset>
+    </form>
 
 {% endblock %}

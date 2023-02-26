@@ -137,29 +137,17 @@ def edit_reaction(post_id, reaction_id):
         db.session.add(reaction)
         db.session.commit()
 
-        db.session.commit()
         flash(f'Good News! Your reaction was UPDATED successfully.')
-        print("Form submitted successfully!")
-        return redirect(url_for('main.post', post_id=post_id), code=302)
+        return redirect(url_for('main.homepage'))
 
     elif request.method == 'GET':
         form.comment.data = reaction.comment
 
-    return render_template('edit_reaction.html', title='Edit Reaction', form=form, post=post, reaction=reaction)
-
-
-@main.route('/delete/<post_id>', methods=['GET', 'POST'])
-@login_required
-def delete_account(post_id):
-    post = Post.query.get(post_id)
-    # Stretch - delete the item
-    try:
-        db.session.delete(post)
-        db.session.commit()
-        flash('Successfully deleted {} post'.format(post))
+    if reaction is None:
+        flash('Reaction does not exist.')
         return redirect(url_for('main.homepage'))
-    finally:
-        flash(' ')
+
+    return render_template('edit_reaction.html', title='Edit Reaction', form=form, post=post, reaction=reaction)
 
 @main.route('/delete/<post_id>', methods=['GET', 'POST'])
 #COMPLETED
@@ -174,18 +162,26 @@ def delete_post(post_id):
         return redirect(url_for('main.homepage'))
     finally:
         flash(' ')
-@main.route('/delete/<post_id>', methods=['GET', 'POST'])
+
+@main.route('/delete/<reaction_id>', methods=['POST'])
 @login_required
-def delete_reaction(post_id):
-    post = Post.query.get(post_id)
+def delete_reaction(reaction_id):
+    reaction = Reaction.query.get_or_404(reaction_id)
+
+    if reaction.created_by != current_user:
+        abort(403)
 
     try:
-        db.session.delete(post)
+        db.session.delete(reaction)
+        print("Reaction deleted successfully!")
         db.session.commit()
-        flash('Successfully deleted {} post'.format(post))
-        return redirect(url_for('main.homepage'))
-    finally:
-        flash(' ')
+        flash('Successfully deleted reaction.')
+    except:
+        db.session.rollback()
+        flash('Could not delete reaction.')
+    
+    return redirect(url_for('main.homepage'))
+
 
 @main.route('/add_friend/<username>', methods=['GET', 'POST'])
 @login_required
