@@ -19,12 +19,12 @@
   </nav>
 
 {% if current_user.is_authenticated %} 
-<form action="/add_friend/{{ user.username }}" method="POST">
+<form action="{{ url_for('main.add_friend', username=user.username) }}" method="POST">
     <input type="submit" value="Add Friend">
 </form>
 
 
-<form action="/remove_friend/{{ user.username}}" method="POST">
+<form action="{{ url_for('main.remove_friend', username=user.username) }}" method="POST">
     <input type="submit" value="Remove Friend">
 </form>
 {% endif %}
@@ -64,7 +64,7 @@ Welcome to {{ user.username }}'s profile.
 
 <p>About Me: {{ user.about_me }}</p>
 <ul>
-    {% for post in current_user.posts %} 
+    {% for post in user.posts %} 
     <div class="post">
        <li><a href="/post/{{ post.id }}">{{ post.title }}</a></li>
     </div>
@@ -75,8 +75,8 @@ Welcome to {{ user.username }}'s profile.
     QUITTERS YOU FOLLOW:
 
     <ul>
-        {% for friend in current_user.friends %}
-        <li><a href="/profile/{{ user.username }}">{{ friend.username }}</a></li>
+        {% for friend in current_user.friend_list %}
+        <li><a href="/profile/{{ friend.username }}">{{ friend.username }}</a></li>
         {% endfor %}
     </ul>
     

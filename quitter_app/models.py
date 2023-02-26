@@ -19,7 +19,7 @@ class ReactionEmoji(FormEnum):
     SUPPORT = '💪'
     CONGRATS = '🥳'
 
-friends = db.Table('friends',
+friend_list_table = db.Table('user_friend',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
 )
@@ -40,11 +40,13 @@ class User(UserMixin, db.Model):
     profile_pic = db.Column(URLType)
     posts = db.relationship('Post', back_populates='created_by')
     reactions = db.relationship('Reaction', back_populates='created_by')
-    friends = db.relationship('User', secondary=friends,
-                              primaryjoin=(friends.c.user_id == id),
-                              secondaryjoin=(friends.c.friend_id == id),
-                              backref=db.backref('friend_of', lazy='dynamic'),
-                              lazy='dynamic')
+    friend_list = db.relationship(
+        'User', secondary='user_friend',
+        primaryjoin=id==friend_list_table.c.user_id,
+        secondaryjoin=id==friend_list_table.c.friend_id,
+        backref='friends'
+    )
+
 
 
     def __str__(self):

@@ -187,28 +187,28 @@ def delete_reaction(post_id):
     finally:
         flash(' ')
 
-@main.route('/add_friend/username', methods=['GET', 'POST'])
+@main.route('/add_friend/<username>', methods=['GET', 'POST'])
 @login_required
 def add_friend(username):
     new_friend = User.query.filter_by(username=username).first()
 
-    if new_friend not in current_user.friends and new_friend is not None:
-        current_user.friends.append(new_friend)
+    if new_friend not in current_user.friend_list and new_friend is not None:
+        current_user.friend_list.append(new_friend)
         db.session.commit()
-        flash(f'Success! {new_friend.username} has been ADDED to your shopping list!')  
+        flash(f'Success! {new_friend.username} has been ADDED to your friend list!')  
         return redirect(url_for('main.user_profile', username=new_friend.username)) 
     else:   
-        return "ERROR!"
+        return (f"Aw shucks! {new_friend.username} is already in your friend list :)")
 
-@main.route('/remove_friend/<user_id>', methods=['POST'])
+@main.route('/remove_friend/<username>', methods=['POST'])
 @login_required
-def remove_friend(user_id):
-    user = User.query.get(user_id)
+def remove_friend(username):
+    user = User.query.filter_by(username=username).first()
 
-    if user in current_user.friends:
-        current_user.friends.remove(user)
+    if user in current_user.friend_list:
+        current_user.friend_list.remove(user)
         db.session.commit()
         flash(f'Success! {user.username} has been REMOVED from your friend list!')   
-        return redirect(url_for('main.user_profile', user_id=user.id)) 
+        return redirect(url_for('main.user_profile', username=user.username)) 
     else:   
         return "ERROR!"

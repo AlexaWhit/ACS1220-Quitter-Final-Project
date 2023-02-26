@@ -63,10 +63,16 @@
 </ul>
 
 
-<h2>Your Friends:</h2>
+<p>
+    QUITTERS YOU FOLLOW:
 
-{% for friend in current_user.friends %} 
-{% endfor %}
+    <ul>
+        {% for friend in current_user.friend_list %}
+        <li><a href="/profile/{{ friend.username }}">{{ friend.username }}</a></li>
+        {% endfor %}
+    </ul>
+    
+</p>
 
 <h2>Your Feed:</h2>
 
