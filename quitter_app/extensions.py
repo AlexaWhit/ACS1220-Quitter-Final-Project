@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
-from flask_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt # type: ignore
 from quitter_app.config import Config
 import os
 
@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/instance/database.db'
+
+# Ensure the instance folder exists
+os.makedirs(os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')), exist_ok=True)
 
 ###########################
 # Authentication

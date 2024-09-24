@@ -5,11 +5,11 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - FLASK_APP=app.py
+      - FLASK_APP=quitter_app.extensions:app
       - FLASK_ENV=development
-      - DATABASE_URL=sqlite:///quitter_app/database.db
+      - DATABASE_URL=sqlite:////app/instance/database.db
       - SECRET_KEY=itsasecret
     volumes:
-      - ./quitter_app:/app 
-      - ./quitter_app/database.db:/app/database.db
+      - ./quitter_app:/app/quitter_app
+      - ./instance:/app/instance
     command: flask run --host=0.0.0.0

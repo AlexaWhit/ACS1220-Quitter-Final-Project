@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Create necessary directories
-RUN mkdir -p /app/instance
+# Create necessary directories and set permissions
+RUN mkdir -p /app/instance && chmod 777 /app/instance
 
 # Set environment variables
 ENV PYTHONPATH=/app
