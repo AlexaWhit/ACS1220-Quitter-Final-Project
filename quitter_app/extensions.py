@@ -10,8 +10,8 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/instance/database.db'
-
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/instance/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database.db'
 # Ensure the instance folder exists
 os.makedirs(os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', '')), exist_ok=True)
 
