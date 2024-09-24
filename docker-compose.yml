@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - DATABASE_URL=sqlite:///quitter_app/database.db
+      - SECRET_KEY=itsasecret
+    volumes:
+      - ./quitter_app:/app 
+      - ./quitter_app/database.db:/app/database.db
+    command: flask run --host=0.0.0.0
